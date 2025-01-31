@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الأول</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
+    <title>حاسبة المعدل الجامعي</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>مرحبًا بك في موقعي الأول!</h1>
-    <p>تم رفع هذا الموقع باستخدام Vercel 🎉</p>
+    <div class="container">
+        <h1>حاسبة المعدل الجامعي</h1>
+        <div class="inputs">
+            <label>الفيزياء:</label> <input type="number" id="physics">
+            <label>الكيمياء:</label> <input type="number" id="chemistry">
+            <label>الإعلام الآلي:</label> <input type="number" id="cs">
+            <label>الجبر:</label> <input type="number" id="algebra">
+            <label>التحليل:</label> <input type="number" id="analysis">
+            <label>الاحتمالات:</label> <input type="number" id="probability">
+            <label>الإنجليزية:</label> <input type="number" id="english">
+            <label>الأخلاقيات:</label> <input type="number" id="ethics">
+        </div>
+        <button onclick="calculateGPA()">احسب المعدل</button>
+        <h2 id="result">المعدل: --</h2>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
