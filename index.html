@@ -1,41 +1,125 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة المعدل الجامعي</title>
+    <title>نظام الطلاب - تسجيل الدخول</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/supabase.min.js"></script>
 </head>
 <body>
-    <!-- نموذج تسجيل الدخول -->
-    <div id="login-container">
-        <h1>تسجيل الدخول</h1>
-        <label>البريد الإلكتروني:</label>
-        <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني">
-        <label>كلمة السر:</label>
-        <input type="password" id="password" placeholder="أدخل كلمة السر">
-        <button onclick="login()">تسجيل الدخول</button>
-        <div id="error-message" class="hidden">❌ البريد الإلكتروني أو كلمة السر غير صحيحة</div>
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- تسجيل الدخول -->
+            <div class="form-container active" id="loginForm">
+                <div class="header">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="avatar">
+                    <h1>مرحباً بعودتك! 👋</h1>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" id="loginPassword" placeholder="كلمة المرور">
+                </div>
+                
+                <button class="primary-btn" onclick="login()">تسجيل الدخول</button>
+                
+                <div class="links">
+                    <span class="switch-form" onclick="showRegister()">ليس لديك حساب؟ <span class="highlight">أنشئ حساباً</span></span>
+                </div>
+            </div>
+
+            <!-- تسجيل حساب جديد -->
+            <div class="form-container" id="registerForm">
+                <div class="header">
+                    <h1>أنشئ حسابك الجديد 🚀</h1>
+                    <p>ابدأ رحلتك التعليمية اليوم</p>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-user icon"></i>
+                    <input type="text" id="regName" placeholder="الاسم الكامل">
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="email" id="regEmail" placeholder="البريد الإلكتروني">
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" id="regPassword" placeholder="كلمة المرور">
+                </div>
+                
+                <button class="primary-btn" onclick="register()">إنشاء الحساب</button>
+                
+                <div class="links">
+                    <span class="switch-form" onclick="showLogin()">لديك حساب بالفعل؟ <span class="highlight">سجل الدخول</span></span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- نموذج إنشاء حساب -->
-    <div id="register-container">
-        <h1>إنشاء حساب</h1>
-        <label>البريد الإلكتروني:</label>
-        <input type="email" id="register-email" placeholder="أدخل بريدك الإلكتروني">
-        <label>كلمة السر:</label>
-        <input type="password" id="register-password" placeholder="أدخل كلمة السر">
-        <button onclick="register()">إنشاء حساب</button>
-    </div>
+    <script>
+        // تبديل النماذج
+        function showRegister() {
+            document.getElementById('loginForm').classList.remove('active')
+            document.getElementById('registerForm').classList.add('active')
+        }
 
-    <!-- حاسبة المعدل الجامعي -->
-    <div id="app-container" class="hidden">
-        <h1>حاسبة المعدل الجامعي</h1>
-        <!-- إضافة بقية عناصر الصفحة هنا -->
-        <button onclick="logout()">تسجيل الخروج</button>
-    </div>
+        function showLogin() {
+            document.getElementById('registerForm').classList.remove('active')
+            document.getElementById('loginForm').classList.add('active')
+        }
 
-    <script src="script.js"></script>
+        // الدوال الأساسية
+        function login() {
+            const email = document.getElementById('loginEmail').value
+            const password = document.getElementById('loginPassword').value
+            
+            if(email && password) {
+                window.location.href = 'dashboard.html'
+            } else {
+                showError('الرجاء ملء جميع الحقول')
+            }
+        }
+
+        function register() {
+            const user = {
+                name: document.getElementById('regName').value,
+                email: document.getElementById('regEmail').value,
+                password: document.getElementById('regPassword').value
+            }
+            
+            if(user.name && user.email && user.password) {
+                localStorage.setItem('user', JSON.stringify(user))
+                showSuccess('تم إنشاء الحساب بنجاح!')
+                showLogin()
+            } else {
+                showError('الرجاء تعبئة جميع البيانات')
+            }
+        }
+
+        // إظهار الرسائل
+        function showError(message) {
+            const errorDiv = document.createElement('div')
+            errorDiv.className = 'alert error'
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`
+            document.querySelector('.auth-card').prepend(errorDiv)
+            setTimeout(() => errorDiv.remove(), 3000)
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.createElement('div')
+            successDiv.className = 'alert success'
+            successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`
+            document.querySelector('.auth-card').prepend(successDiv)
+            setTimeout(() => successDiv.remove(), 3000)
+        }
+    </script>
 </body>
 </html>

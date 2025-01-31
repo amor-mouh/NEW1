@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>حساب المعدل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="avatar">
+                <h3>الطالب الجزائري</h3>
+            </div>
+            <nav>
+                <a href="#" class="active"><i class="fas fa-calculator"></i> حساب المعدل</a>
+                <a href="#"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#"><i class="fas fa-cog"></i> الإعدادات</a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1>حاسبة المعدل الدراسي 📚</h1>
+                <button class="logout-btn" onclick="window.location.href='index.html'"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+            </div>
+
+            <div class="calculator">
+                <div id="gradesContainer">
+                    <div class="grade-input">
+                        <input type="number" placeholder="أدخل درجة المادة" max="20">
+                        <i class="fas fa-times remove-btn" onclick="removeGrade(this)"></i>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="add-btn" onclick="addGrade()"><i class="fas fa-plus"></i> إضافة مادة</button>
+                    <button class="calculate-btn" onclick="calculate()"><i class="fas fa-calculator"></i> حساب المعدل</button>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>المعدل النهائي</h3>
+                    </div>
+                    <div class="result-value" id="result">0.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gradeCount = 1
+
+        function addGrade() {
+            gradeCount++
+            const newGrade = document.createElement('div')
+            newGrade.className = 'grade-input'
+            newGrade.innerHTML = `
+                <input type="number" placeholder="أدخل درجة المادة" max="20">
+                <i class="fas fa-times remove-btn" onclick="removeGrade(this)"></i>
+            `
+            document.getElementById('gradesContainer').appendChild(newGrade)
+        }
+
+        function removeGrade(element) {
+            element.parentElement.remove()
+            gradeCount--
+        }
+
+        function calculate() {
+            const inputs = document.querySelectorAll('.grade-input input')
+            let total = 0
+            let valid = true
+
+            inputs.forEach(input => {
+                const value = parseFloat(input.value)
+                if (isNaN(value) || value < 0 || value > 20) {
+                    input.style.borderColor = '#ef4444'
+                    valid = false
+                } else {
+                    total += value
+                    input.style.borderColor = '#e2e8f0'
+                }
+            })
+
+            if (!valid || gradeCount === 0) {
+                alert('الرجاء إدخال درجات صحيحة بين 0 و 20')
+                return
+            }
+
+            const average = total / gradeCount
+            document.getElementById('result').textContent = average.toFixed(2)
+            
+            // تغيير لون النتيجة حسب القيمة
+            const resultElement = document.getElementById('result')
+            resultElement.style.color = 
+                average >= 16 ? '#10b981' :
+                average >= 12 ? '#f59e0b' :
+                '#ef4444'
+        }
+    </script>
+</body>
+</html>
