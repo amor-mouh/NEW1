@@ -1,49 +1,45 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    margin-top: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+#login-container, #register-container, #app-container {
+    margin: 20px;
     padding: 20px;
-    direction: rtl;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 320px;
-    margin: auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
-.inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-input {
-    padding: 5px;
-    font-size: 16px;
-    width: 80px;
-    text-align: center;
-}
+
 button {
-    margin-top: 15px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007bff;
+    padding: 10px 20px;
+    background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
+
 button:hover {
     background-color: #0056b3;
 }
-#result {
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-}
-span {
-    font-size: 14px;
-    color: green;
-    font-weight: bold;
+
+#error-message {
+    color: red;
+    display: none;
 }
