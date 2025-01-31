@@ -4,6 +4,21 @@ const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener("DOMContentLoaded", loadSavedData);
 
+function register() {
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    
+    supabase.auth.signUp({ email, password })
+        .then(({ user, error }) => {
+            if (error) {
+                document.getElementById('error-message').style.display = 'block';
+            } else {
+                alert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.');
+                document.getElementById('register-container').style.display = 'none';
+                document.getElementById('login-container').style.display = 'block';
+            }
+        });
+}
 
 function login() {
     const email = document.getElementById('email').value;
