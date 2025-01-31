@@ -10,16 +10,17 @@
     <div class="container">
         <h1>حاسبة المعدل الجامعي</h1>
         <div class="inputs">
-            <label>الفيزياء:</label> <input type="number" id="physics">
-            <label>الكيمياء:</label> <input type="number" id="chemistry">
-            <label>الإعلام الآلي:</label> <input type="number" id="cs">
-            <label>الجبر:</label> <input type="number" id="algebra">
-            <label>التحليل:</label> <input type="number" id="analysis">
-            <label>الاحتمالات:</label> <input type="number" id="probability">
-            <label>الإنجليزية:</label> <input type="number" id="english">
-            <label>الأخلاقيات:</label> <input type="number" id="ethics">
+            <label>الفيزياء:</label> <input type="number" id="physics"> <span id="physics-result"></span>
+            <label>الكيمياء:</label> <input type="number" id="chemistry"> <span id="chemistry-result"></span>
+            <label>الإعلام الآلي:</label> <input type="number" id="cs"> <span id="cs-result"></span>
+            <label>الجبر:</label> <input type="number" id="algebra"> <span id="algebra-result"></span>
+            <label>التحليل:</label> <input type="number" id="analysis"> <span id="analysis-result"></span>
+            <label>الاحتمالات:</label> <input type="number" id="probability"> <span id="probability-result"></span>
+            <label>الإنجليزية:</label> <input type="number" id="english"> <span id="english-result"></span>
+            <label>الأخلاقيات:</label> <input type="number" id="ethics"> <span id="ethics-result"></span>
         </div>
         <button onclick="calculateGPA()">احسب المعدل</button>
+        <button onclick="resetFields()">مسح البيانات</button>
         <h2 id="result">المعدل: --</h2>
     </div>
     <script src="script.js"></script>
