@@ -1,5 +1,6 @@
-const supabaseUrl = 'YOUR_SUPABASE_URL';  // استبدله بعنوان URL الخاص بك
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';  // استبدله بمفتاح anon الخاص بك
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://svwogdmjmhjbnjthnpfg.supabase.co';  // استبدله بعنوان URL الخاص بك
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2d29nZG1qbWhqYm5qdGhucGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgzMzc2NDUsImV4cCI6MjA1MzkxMzY0NX0.QqxyT4bYAuQdaRDEae7tu8fGbRDvC4G7Sgm5S60U11w';  // استبدله بمفتاح anon الخاص بك
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // دالة تسجيل الدخول
