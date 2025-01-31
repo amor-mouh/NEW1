@@ -1,52 +1,49 @@
-document.addEventListener("DOMContentLoaded", loadSavedData);
-
-function calculateGPA() {
-    let subjects = [
-        { id: "physics", weight: 4 },
-        { id: "chemistry", weight: 4 },
-        { id: "cs", weight: 1 },
-        { id: "algebra", weight: 2 },
-        { id: "analysis", weight: 3 },
-        { id: "probability", weight: 2 },
-        { id: "english", weight: 1 },
-        { id: "ethics", weight: 1 }
-    ];
-
-    let total = 0;
-    let weightSum = 0;
-
-    subjects.forEach(subject => {
-        let value = parseFloat(document.getElementById(subject.id).value) || 0;
-        let subjectResult = (value * subject.weight).toFixed(2);
-        document.getElementById(subject.id + "-result").innerText = `(${subjectResult})`;
-        total += value * subject.weight;
-        weightSum += subject.weight;
-        localStorage.setItem(subject.id, value); // حفظ البيانات
-    });
-
-    let gpa = total / weightSum;
-    document.getElementById("result").innerText = `المعدل: ${gpa.toFixed(2)}`;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+    direction: rtl;
 }
-
-function resetFields() {
-    let subjects = ["physics", "chemistry", "cs", "algebra", "analysis", "probability", "english", "ethics"];
-    
-    subjects.forEach(id => {
-        document.getElementById(id).value = "";
-        document.getElementById(id + "-result").innerText = "";
-        localStorage.removeItem(id);
-    });
-
-    document.getElementById("result").innerText = "المعدل: --";
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 320px;
+    margin: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
-function loadSavedData() {
-    let subjects = ["physics", "chemistry", "cs", "algebra", "analysis", "probability", "english", "ethics"];
-
-    subjects.forEach(id => {
-        let savedValue = localStorage.getItem(id);
-        if (savedValue) {
-            document.getElementById(id).value = savedValue;
-        }
-    });
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+input {
+    padding: 5px;
+    font-size: 16px;
+    width: 80px;
+    text-align: center;
+}
+button {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+#result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+span {
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
 }
